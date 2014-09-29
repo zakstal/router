@@ -1,7 +1,11 @@
 class ContactsController < ApplicationController
   def index
-    contact = Contact.all
-    render json: contacts
+
+    user = User.find(params[:user_id])
+    shared = user.shared_contacts
+    contacts = user.contacts
+
+    render json: {user_contacts: contacts, shared_contacts: shared}
   end
 
   def create
@@ -33,7 +37,7 @@ class ContactsController < ApplicationController
 
   private
   def param_stuff
-    params.require(:contact).permit(:user_id, :eamil)
+    params.permit(:name, :user_id, :email)
   end
 
 end
