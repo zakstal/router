@@ -27,13 +27,13 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.delete(param_stuff[:id])
+    @user = User.destroy(param_stuff[:id])
     render json: @user
   end
 
   private
   def param_stuff
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:user_name)
   end
 
 end
